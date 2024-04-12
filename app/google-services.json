@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "529124024162",
+    "project_id": "insdemo-f2f43",
+    "storage_bucket": "insdemo-f2f43.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:529124024162:android:1d0463bb8bf27e3b50d63b",
+        "android_client_info": {
+          "package_name": "com.example.instagramdemo_v1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtAJdbAL1wDYS0O8MrRWP_B2FBmyorsB4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
