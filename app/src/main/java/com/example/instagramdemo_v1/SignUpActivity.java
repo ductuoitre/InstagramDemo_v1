@@ -89,51 +89,61 @@ public class SignUpActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()) {
-                                String id = task.getResult().getUser().getUid();
-                                DatabaseReference reference = firebaseDatabase.getReference().child("user").child(id);
-                                StorageReference storageReference = firebaseStorage.getReference().child("upload").child(id);
-                                if(avtUri != null) {
-                                    storageReference.putFile(avtUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                                          if(task.isSuccessful()) {
-                                              storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                                  @Override
-                                                  public void onSuccess(Uri uri) {
-                                                        avturi = uri.toString();
-                                                        User user = new User(avturi, name, email, password, id, "", status );
-                                                        reference.setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                          @Override
-                                                          public void onComplete(@NonNull Task<Void> task) {
-                                                              if(task.isSuccessful()) {
-                                                                  Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
-                                                                  startActivity(intent);
-                                                                  Toast.makeText(SignUpActivity.this, "Sign Up Successful !!!", Toast.LENGTH_LONG).show();
-                                                                  finish();
-                                                              }
-                                                          }
-                                                      });
-                                                  }
-                                              });
-                                          }
-                                        }
-                                    });
-                                } else {
-                                    String status = "Hey I'm using this application";
-                                    avturi = "https://firebasestorage.googleapis.com/v0/b/insdemo-f2f43.appspot.com/o/picture.jpg?alt=media&token=413560fe-7b61-49f8-8d1d-fd38d179f11f";
-                                    User user = new User(avturi, name, email, password, id, "", status);
-                                    reference.setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            if(task.isSuccessful()) {
-                                                Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
-                                                startActivity(intent);
-                                                finish();
-                                                Toast.makeText(SignUpActivity.this, "Sign Up Successful !!!", Toast.LENGTH_LONG).show();
+                                auth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task1) {
+                                        if(task1.isSuccessful()) {
+                                            String id = task.getResult().getUser().getUid();
+                                            DatabaseReference reference = firebaseDatabase.getReference().child("user").child(id);
+                                            StorageReference storageReference = firebaseStorage.getReference().child("upload").child(id);
+                                            if(avtUri != null) {
+                                                storageReference.putFile(avtUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                                                        if(task.isSuccessful()) {
+                                                            storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                                                @Override
+                                                                public void onSuccess(Uri uri) {
+                                                                    avturi = uri.toString();
+                                                                    User user = new User(avturi, name, email, password, id, "", status );
+                                                                    reference.setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                        @Override
+                                                                        public void onComplete(@NonNull Task<Void> task) {
+                                                                            if(task.isSuccessful()) {
+                                                                                Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
+                                                                                startActivity(intent);
+                                                                                Toast.makeText(SignUpActivity.this, "Sign Up Successful !!!", Toast.LENGTH_LONG).show();
+                                                                                finish();
+                                                                            }
+                                                                        }
+                                                                    });
+                                                                }
+                                                            });
+                                                        }
+                                                    }
+                                                });
+                                            } else {
+                                                String status = "Hey I'm using this application";
+                                                avturi = "https://firebasestorage.googleapis.com/v0/b/insdemo-f2f43.appspot.com/o/picture.jpg?alt=media&token=413560fe-7b61-49f8-8d1d-fd38d179f11f";
+                                                User user = new User(avturi, name, email, password, id, "", status);
+                                                reference.setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<Void> task) {
+                                                        if(task.isSuccessful()) {
+                                                            Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
+                                                            startActivity(intent);
+                                                            finish();
+                                                            Toast.makeText(SignUpActivity.this, "Sign Up Successful !!!", Toast.LENGTH_LONG).show();
+                                                        }
+                                                    }
+                                                });
                                             }
+                                        } else {
+                                            Toast.makeText(SignUpActivity.this, task1.getException().getMessage(), Toast.LENGTH_LONG).show();
                                         }
-                                    });
-                                }
+                                    }
+                                });
+
                             } else {
                                 Toast.makeText(SignUpActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
                             }
