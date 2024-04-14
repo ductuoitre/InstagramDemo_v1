@@ -71,7 +71,7 @@ public class messagesAdpter extends RecyclerView.Adapter {
         if (holder.getClass()==senderVierwHolder.class){
             senderVierwHolder viewHolder = (senderVierwHolder) holder;
             viewHolder.msgtxt.setText(messages.getMessage());
-            Picasso.get().load(senderImg).into(viewHolder.circleImageView);
+           // Picasso.get().load(senderImg).into(viewHolder.circleImageView);
         }else { reciverViewHolder viewHolder = (reciverViewHolder) holder;
             viewHolder.msgtxt.setText(messages.getMessage());
             Picasso.get().load(reciverIImg).into(viewHolder.circleImageView);

@@ -22,10 +22,6 @@
             android:name=".ChatWin"
             android:exported="false" />
         <activity
-            android:name=".ui.login.ChatWin"
-            android:exported="false"
-            android:label="@string/title_activity_chat_win" />
-        <activity
             android:name=".MainScreenActivity"
             android:exported="false" />
         <activity

@@ -1,6 +1,7 @@
 package com.example.instagramdemo_v1;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -33,7 +34,7 @@ public class ChatWin extends AppCompatActivity {
     TextView reciverNName;
     FirebaseDatabase database;
     FirebaseAuth firebaseAuth;
-    public  static String senderImg;
+    public  static String senderImg = "";
     public  static String reciverIImg;
     CardView sendbtn;
     EditText textmsg;
@@ -46,7 +47,12 @@ public class ChatWin extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_win);
-        getSupportActionBar().hide();
+
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.hide();
+        }
+
         database = FirebaseDatabase.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -98,18 +104,18 @@ public class ChatWin extends AppCompatActivity {
 
             }
         });
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                senderImg= snapshot.child("profilepic").getValue().toString();
-                reciverIImg=reciverimg;
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+//        reference.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                senderImg= snapshot.child("profilepic").getValue().toString();
+//                reciverIImg=reciverimg;
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
 
         sendbtn.setOnClickListener(new View.OnClickListener() {
             @Override
