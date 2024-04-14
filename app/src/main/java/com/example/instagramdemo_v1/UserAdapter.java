@@ -3,6 +3,7 @@ package com.example.instagramdemo_v1;
 import android.content.Context;
 import android.content.Intent;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,11 +46,27 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.Viewholder> {
         holder.userstatus.setText(users.getStatus());
         Picasso.get().load(users.getAvt()).into(holder.userimg);
 
-        holder.camera.setOnClickListener(new View.OnClickListener() {
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                openCamera();
+            public void onClick(View view) {
+                try{
+                    Intent intent = new Intent(MainScreen, ChatWin.class);
+                    intent.putExtra("nameeee",users.getUserName());
+                    intent.putExtra("reciverImg",users.getAvt());
+                    intent.putExtra("uid",users.getUserId());
+                    MainScreen.startActivity(intent);
+                } catch ( Exception E){
+                    Log.d("MainScreenActivity", E.getMessage());
+                }
+
+
             }
+
+//        holder.camera.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                openCamera();
+//            }
         });
 
 

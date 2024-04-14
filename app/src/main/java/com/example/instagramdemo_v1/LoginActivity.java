@@ -55,11 +55,11 @@ public class LoginActivity extends AppCompatActivity {
                             if(task.isSuccessful()) {
                                 if(auth.getCurrentUser().isEmailVerified()) {
                                     try {
-<<<<<<<<< Temporary merge branch 1
+// <<<<<<<<< Temporary merge branch 1
 
-=========
+ // =========
                                         Intent intent = new Intent(LoginActivity.this, MainScreenActivity.class);
->>>>>>>>> Temporary merge branch 2
+// >>>>>>>>> Temporary merge branch 2
                                         startActivity(intent);
                                         finish();
                                     } catch (Exception e) {

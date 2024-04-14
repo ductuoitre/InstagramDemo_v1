@@ -9,6 +9,7 @@ public class User {
     private String lastMessage;
     private String status;
 
+
     // Constructor mặc định không có đối số
     public User() {
         // Đây là constructor mặc định được Firebase yêu cầu để deserialize dữ liệu
