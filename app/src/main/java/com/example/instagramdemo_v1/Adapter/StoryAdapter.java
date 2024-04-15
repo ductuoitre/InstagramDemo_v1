@@ -1,5 +1,6 @@
 package com.example.instagramdemo_v1.Adapter;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.instagramdemo_v1.Model.StoryModel;
 import com.example.instagramdemo_v1.R;
+import com.example.instagramdemo_v1.UploadStoryActivity;
 import com.thbd.tools.Tools;
 
 import java.util.List;
@@ -36,7 +38,6 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.ViewHolder> 
         }else{
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.story_item, parent, false);
         }
-
         return new ViewHolder(view);
     }
 
@@ -48,15 +49,14 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.ViewHolder> 
         int viewType =  getItemViewType(position);
         if (viewType == ADD_STORY_TYPE){
             String uid = model.getUid();
-            int image = model.getImage();
-            holder.setAddStory(uid, image);
+            String stories_img= model.getStory_img();
+            holder.setAddStory(uid, stories_img);
         }else{
             String uid = model.getUid();
             String sid = model.getSid();
-
             String name = model.getName();
-            int image = model.getImage();
-            holder.setStory(uid,sid,name,image);
+            String stories_img= model.getStory_img();
+            holder.setStory(uid,sid,name,stories_img);
         }
 
 
@@ -85,21 +85,25 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.ViewHolder> 
 
             title =  itemView.findViewById(R.id.title_id);
             profile_img =  itemView.findViewById(R.id.userProfile_id);
-
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(getAdapterPosition() == 0){
+                        Intent intent = new Intent(itemView.getContext(), UploadStoryActivity.class);
+                        itemView.getContext().startActivity(intent);
+                    }
+                }
+            });
         }
 
-        public void setAddStory(String uid, int image) {
+        public void setAddStory(String uid, String stories_img) {
             title.setText("Add Story");
-            Bitmap myLogo = BitmapFactory.decodeResource(itemView.getContext().getResources(), image);
-            Tools.displayImageCircle(itemView.getContext(), profile_img, myLogo );
-
-
+            Tools.displayImageCircle(itemView.getContext(), profile_img, stories_img );
         }
 
-        public void setStory(String uid, String sid, String name, int image) {
+        public void setStory(String uid, String sid, String name, String stories_img) {
             title.setText(name);
-            Bitmap myLogo = BitmapFactory.decodeResource(itemView.getContext().getResources(), image);
-            Tools.displayImageCircle(itemView.getContext(), profile_img, myLogo );
+            Tools.displayImageCircle(itemView.getContext(), profile_img, stories_img );
 
         }
     }

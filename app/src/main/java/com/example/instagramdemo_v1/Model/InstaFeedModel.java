@@ -5,6 +5,22 @@ public class InstaFeedModel {
     int image;
     String username, location, feed_img, status, comment_count, date;
 
+    public InstaFeedModel() {
+    }
+
+    @Override
+    public String toString() {
+        return "InstaFeedModel{" +
+                "image=" + image +
+                ", username='" + username + '\'' +
+                ", location='" + location + '\'' +
+                ", feed_img='" + feed_img + '\'' +
+                ", status='" + status + '\'' +
+                ", comment_count='" + comment_count + '\'' +
+                ", date='" + date + '\'' +
+                '}';
+    }
+
     public InstaFeedModel(int image, String username, String location, String feed_img, String status, String comment_count, String date) {
         this.image = image;
         this.username = username;

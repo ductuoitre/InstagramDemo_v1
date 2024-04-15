@@ -2,21 +2,44 @@ package com.example.instagramdemo_v1.Model;
 
 public class StoryModel {
     String uid, sid, name;
-    int image, type;
+    int  type;
 
-    public StoryModel(int type,String uid, String sid, String name, int image) {
+    public String getStory_img() {
+        return story_img;
+    }
+
+    public void setStory_img(String story_img) {
+        this.story_img = story_img;
+    }
+
+    String story_img;
+
+    public StoryModel(int type,String uid, String sid, String name, String story_img) {
         this.type = type;
         this.uid = uid;
         this.sid = sid;
         this.name = name;
-        this.image = image;
+        this.story_img = story_img;
 
     }
 
-    public StoryModel(int type, String uid, int image) {
+    @Override
+    public String toString() {
+        return "StoryModel{" +
+                "uid='" + uid + '\'' +
+                ", sid='" + sid + '\'' +
+                ", name='" + name + '\'' +
+                ", type=" + type +
+                ", story_img='" + story_img + '\'' +
+                '}';
+    }
+
+    public StoryModel(int type, String uid, String story_img) {
         this.uid = uid;
-        this.image = image;
         this.type = type;
+    }
+
+    public StoryModel() {
     }
 
     public String getUid() {
@@ -43,13 +66,6 @@ public class StoryModel {
         this.name = name;
     }
 
-    public int getImage() {
-        return image;
-    }
-
-    public void setImage(int image) {
-        this.image = image;
-    }
 
     public int getType() {
         return type;
