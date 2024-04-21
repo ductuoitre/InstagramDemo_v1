@@ -1,7 +1,6 @@
-package com.example.instagramdemo_v1;
+package com.example.instagramdemo_v1.Adapter;
 
 import static com.example.instagramdemo_v1.ChatWin.reciverIImg;
-import static com.example.instagramdemo_v1.ChatWin.senderImg;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -14,6 +13,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.instagramdemo_v1.R;
+import com.example.instagramdemo_v1.Model.msgModelclass;
 import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.picasso.Picasso;
 

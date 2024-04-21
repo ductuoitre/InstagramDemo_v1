@@ -13,6 +13,16 @@
         android:id="@+id/ll1"
         android:gravity="center">
 
+        <ImageView
+            android:id="@+id/chatout"
+            android:layout_width="48dp"
+            android:layout_height="36dp"
+            android:layout_gravity="left"
+            android:layout_marginTop="10px"
+            android:src="@drawable/arrow"
+            android:onClick="chatout_onClick"
+            />
+
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profileimgg"
             android:layout_width="104.00dp"
@@ -37,6 +47,7 @@
             android:text="ayushvishwakarma"
             android:textColor="@color/white"
             android:textSize="19.5dp" />
+
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView

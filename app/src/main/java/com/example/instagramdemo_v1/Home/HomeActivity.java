@@ -20,8 +20,9 @@ import com.example.instagramdemo_v1.LoginActivity;
 import com.example.instagramdemo_v1.MainScreenActivity;
 import com.example.instagramdemo_v1.Model.InstaFeedModel;
 import com.example.instagramdemo_v1.Model.StoryModel;
+import com.example.instagramdemo_v1.ProfileActivity;
 import com.example.instagramdemo_v1.R;
-import com.example.instagramdemo_v1.SignUpActivity;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,6 +31,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 
 
@@ -50,17 +52,25 @@ public class HomeActivity extends AppCompatActivity {
         ValueEventListener eventListener;
         SearchView searchView;
         ImageView imgChat;
-
+        FirebaseAuth auth;
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_home);
+
+            auth = FirebaseAuth.getInstance();
+            if(auth.getCurrentUser() == null) {
+                Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
             recyclerView = findViewById(R.id.story_recyclerView_id);
             feedRecyclerView = findViewById(R.id.recyclerView_id);
-            imgChat= findViewById(R.id.btnChat);
+            imgChat= findViewById(R.id.imgChat);
             LinearLayout homeBtn = findViewById(R.id.homeBtn);
             LinearLayout addBtn = findViewById(R.id.addBtn);
             LinearLayout searchBtn = findViewById(R.id.searchBtn);
+            LinearLayout mainBtn = findViewById(R.id.mainBtn);
+
             imgChat.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -145,7 +155,13 @@ public class HomeActivity extends AppCompatActivity {
                     dialog.dismiss();
                 }
             });
-
+            mainBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(HomeActivity.this, ProfileActivity.class);
+                    startActivity(i);
+                }
+            });
 
     }
 }

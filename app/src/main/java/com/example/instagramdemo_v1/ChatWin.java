@@ -1,5 +1,11 @@
 package com.example.instagramdemo_v1;
 
+import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,12 +13,8 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Bundle;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
-
+import com.example.instagramdemo_v1.Adapter.messagesAdpter;
+import com.example.instagramdemo_v1.Model.msgModelclass;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -130,25 +132,42 @@ public class ChatWin extends AppCompatActivity {
                 msgModelclass messagess = new msgModelclass(message,SenderUID,date.getTime());
 
                 database=FirebaseDatabase.getInstance();
+                DatabaseReference senderLastMessageRef = database.getReference().child("user").child(SenderUID).child("lastMessage");
+                DatabaseReference reciverLastMessageRef = database.getReference().child("user").child(reciverUid).child("lastMessage");
+
                 database.getReference().child("chats")
                         .child(senderRoom)
                         .child("messages")
-                        .push().setValue(messagess).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        .push().setValue(messagess)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
-                                database.getReference().child("chats")
-                                        .child(reciverRoom)
-                                        .child("messages")
-                                        .push().setValue(messagess).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<Void> task) {
-
-                                            }
-                                        });
+                                // Cập nhật lastMessage cho người gửi
+                                senderLastMessageRef.setValue(message).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        database.getReference().child("chats")
+                                                .child(reciverRoom)
+                                                .child("messages")
+                                                .push().setValue(messagess)
+                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<Void> task) {
+                                                        // Cập nhật lastMessage cho người nhận
+                                                        reciverLastMessageRef.setValue(message);
+                                                    }
+                                                });
+                                    }
+                                });
                             }
                         });
             }
         });
 
+
+    }
+
+    public void chatout_onClick(View view) {
+        finish();
     }
 }

@@ -2,21 +2,24 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:background="@color/black">
+    android:background="@color/black"
+    android:clickable="false"
+    android:contextClickable="true"
+    android:longClickable="false"
+    android:orientation="horizontal">
 
     <!-- Vùng hình tròn -->
 
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/avt"
+        android:id="@+id/avtProfile"
         android:layout_width="40sp"
         android:layout_height="40sp"
         android:layout_marginStart="10sp"
         android:layout_marginTop="10sp"
         android:layout_marginEnd="10sp"
         android:layout_marginBottom="10sp"
-        android:src="@drawable/checked"/>
+        android:src="@drawable/checked" />
 
 
     <LinearLayout
@@ -36,11 +39,11 @@
             android:textSize="16dp" />
 
         <TextView
-            android:id="@+id/userstatus"
+            android:id="@+id/lastMessage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_regular"
-            android:text="Status"
+            android:text="lastMessage"
             android:textColor="@color/grey"
             android:textSize="13sp" />
     </LinearLayout>
@@ -53,6 +56,6 @@
         android:layout_marginTop="10sp"
         android:layout_marginEnd="10sp"
         android:layout_marginBottom="10sp"
-        android:src="@drawable/camera"/>
+        android:src="@drawable/camera" />
 
 </LinearLayout>

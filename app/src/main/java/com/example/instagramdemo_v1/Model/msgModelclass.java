@@ -1,4 +1,4 @@
-package com.example.instagramdemo_v1;
+package com.example.instagramdemo_v1.Model;
 
 public class msgModelclass {
     String message;

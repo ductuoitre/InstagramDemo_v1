@@ -1,9 +1,7 @@
 package com.example.instagramdemo_v1;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -11,15 +9,16 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.instagramdemo_v1.BroadcastReciever.ConnectionReceiver;
 import com.example.instagramdemo_v1.Home.HomeActivity;
-import com.example.instagramdemo_v1.Model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-
-import java.util.ArrayList;
 
 public class LoginActivity extends AppCompatActivity {
     FirebaseAuth auth;
@@ -27,6 +26,8 @@ public class LoginActivity extends AppCompatActivity {
     Button btnLogin, btnSignUp;
     TextView tvForgotPassword;
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+    ConnectionReceiver receiver;
+    IntentFilter intentFilter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,5 +94,10 @@ public class LoginActivity extends AppCompatActivity {
                 finish();
             }
         });
+        receiver = new ConnectionReceiver();
+        intentFilter = new IntentFilter("com.example.lab31.SOME_ACTION");
+        intentFilter.addAction(Intent.ACTION_AIRPLANE_MODE_CHANGED);
+        intentFilter.addAction("android.net.conn.CONNECTIVITY_CHANGE");
+        registerReceiver(receiver, intentFilter);
     }
 }
