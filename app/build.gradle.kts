@@ -57,8 +57,4 @@ dependencies {
     implementation ("com.github.tharvestbd:Tools:1.0.3")
     implementation ("com.github.bumptech.glide:glide:4.16.0")
     api ("com.theartofdev.edmodo:android-image-cropper:2.8.+")
-
-    implementation ("com.github.OMARIHAMZA:StoryView:1.0.2-alpha")
-
-    implementation ("com.github.bxute:StoryView:v1.0")
 }
