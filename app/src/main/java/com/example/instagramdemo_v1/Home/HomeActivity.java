@@ -50,7 +50,7 @@ public class HomeActivity extends AppCompatActivity {
         DatabaseReference databaseReference;
         ValueEventListener eventListener;
         SearchView searchView;
-    ImageView imgChat;
+        ImageView imgChat;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
