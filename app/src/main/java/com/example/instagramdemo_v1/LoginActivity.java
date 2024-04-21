@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.instagramdemo_v1.Home.HomeActivity;
 import com.example.instagramdemo_v1.Model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -58,7 +59,7 @@ public class LoginActivity extends AppCompatActivity {
 // <<<<<<<<< Temporary merge branch 1
 
  // =========
-                                        Intent intent = new Intent(LoginActivity.this, MainScreenActivity.class);
+                                        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
 // >>>>>>>>> Temporary merge branch 2
                                         startActivity(intent);
                                         finish();

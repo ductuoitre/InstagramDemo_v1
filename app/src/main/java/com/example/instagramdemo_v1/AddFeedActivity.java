@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.instagramdemo_v1.Home.HomeActivity;
 import com.example.instagramdemo_v1.Model.InstaFeedModel;
 import com.example.instagramdemo_v1.Model.StoryModel;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -75,6 +76,9 @@ public class AddFeedActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     saveData();
+
+                    Intent intent = new Intent(AddFeedActivity.this, HomeActivity.class);
+                    startActivity(intent);
                 }
             });
         }
@@ -107,7 +111,8 @@ public class AddFeedActivity extends AppCompatActivity {
 
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             String userId = user.getUid();
-            String userName= user.getDisplayName();
+            String userName= user.getEmail();
+            Toast.makeText(this, userName.toString(), Toast.LENGTH_SHORT).show();
             String sId= UUID.randomUUID().toString();
             int image= R.drawable.ic_launcher_foreground;
             String status= textpost.getText().toString();

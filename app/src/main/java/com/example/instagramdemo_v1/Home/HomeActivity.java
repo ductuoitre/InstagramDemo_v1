@@ -31,6 +31,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import omari.hamza.storyview.StoryView;
+
 
 public class HomeActivity extends AppCompatActivity {
     StoryAdapter adapter;
@@ -48,6 +50,7 @@ public class HomeActivity extends AppCompatActivity {
         DatabaseReference databaseReference;
         ValueEventListener eventListener;
         SearchView searchView;
+    ImageView imgChat;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -55,11 +58,18 @@ public class HomeActivity extends AppCompatActivity {
             setContentView(R.layout.activity_home);
             recyclerView = findViewById(R.id.story_recyclerView_id);
             feedRecyclerView = findViewById(R.id.recyclerView_id);
-
+            imgChat= findViewById(R.id.btnChat);
             LinearLayout homeBtn = findViewById(R.id.homeBtn);
             LinearLayout addBtn = findViewById(R.id.addBtn);
             LinearLayout searchBtn = findViewById(R.id.searchBtn);
-
+            imgChat.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(HomeActivity.this, MainScreenActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+            });
             addBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -77,14 +87,6 @@ public class HomeActivity extends AppCompatActivity {
             modelList = new ArrayList<>();
             databaseReference = FirebaseDatabase.getInstance().getReference("Story");
             dialog.show();
-            modelList.add(new StoryModel(ADD_STORY_TYPE, "1", "R.drawable.profile1"));
-            modelList.add(new StoryModel(ALL_STORY_TYPE, "2","10","Mariya", "R.drawable.profile3"));
-            modelList.add(new StoryModel(ALL_STORY_TYPE, "3","11","Jack", "R.drawable.profile2"));
-            modelList.add(new StoryModel(ALL_STORY_TYPE, "4","13","Alina", "R.drawable.profile4"));
-            modelList.add(new StoryModel(ALL_STORY_TYPE, "2","10","Mariya", "R.drawable.profile3"));
-            modelList.add(new StoryModel(ALL_STORY_TYPE, "3","11","Jack", "R.drawable.profile2"));
-            modelList.add(new StoryModel(ALL_STORY_TYPE, "4","13","Alina", "R.drawable.profile4"));
-
 
             adapter = new StoryAdapter(modelList);
             recyclerView.setAdapter(adapter);
@@ -113,8 +115,6 @@ public class HomeActivity extends AppCompatActivity {
 
 
 
-
-
         /// setup feed modelList
 
         feedModelList.add(new InstaFeedModel(R.drawable.profile2,"Jack","USA","https://marketplace.canva.com/EAFH_oMBen8/1/0/900w/canva-gray-and-white-asthetic-friend-instagram-story-C5KpyJG5MHA.jpg", "Hello, have a nice day","3", "10/7/2023"));
@@ -137,7 +137,7 @@ public class HomeActivity extends AppCompatActivity {
                         Log.d("DataSnapshot", "Key: " + itemSnapshot.getKey() + ", Value: " + instaFeedModel.toString());
                     }
 
-                    adapter.notifyDataSetChanged();
+                    feedAdapter.notifyDataSetChanged();
                     dialog.dismiss();
                 }
 

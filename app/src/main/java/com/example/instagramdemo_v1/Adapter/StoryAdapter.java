@@ -91,6 +91,8 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.ViewHolder> 
                     if(getAdapterPosition() == 0){
                         Intent intent = new Intent(itemView.getContext(), UploadStoryActivity.class);
                         itemView.getContext().startActivity(intent);
+                    }else{
+
                     }
                 }
             });
